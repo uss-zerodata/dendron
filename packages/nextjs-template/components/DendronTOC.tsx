@@ -23,21 +23,22 @@ export const DendronTOC = ({
   note: NoteProps;
 } & ComponentProps<typeof Anchor>) => {
   return (
-    <Anchor style={{ zIndex: 1 }} className="dendron-toc" {...rest}>
-      {Object.entries(note?.anchors).map(([key, entry]) => (
-        <React.Fragment key={key}>
-          {entry?.type === "header" ? (
-            <Link
-              href={`#${key}`}
-              // `anchor.text` contains clean, user displayable text for
-              // headings. It should always exist for exported notes, but we
-              // have this fallback just in case.
-              title={entry?.text ?? unslug(entry?.value)}
-            />
-          ) : null}
-        </React.Fragment>
-      ))}
-    </Anchor>
+		<Anchor style={{ zIndex: 1 }} className="dendron-toc" {...rest}>
+			{Object.entries(note?.anchors).map(([key, entry]) => (
+				<React.Fragment key={key}>
+					{entry?.type === "header" ? (
+						<Link
+							href={`#${key}`}
+							// `anchor.text` contains clean, user displayable text for
+							// headings. It should always exist for exported notes, but we
+							// have this fallback just in case.
+							// title={entry?.text ?? unslug(entry?.value)}
+							title={ "᲼᲼".repeat(entry?.depth - 1 || 0) + (entry?.text ?? unslug(entry?.value))}
+						/>
+					) : null}
+				</React.Fragment>
+			))}
+		</Anchor>
   );
 };
 
